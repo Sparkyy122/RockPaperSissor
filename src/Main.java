@@ -1,41 +1,26 @@
 import java.util.Random;
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // Stating Global variables
-        boolean gameRunning = true;
+        String[] shapes = {"Rock", "Paper", "Scissor", "Exit"};
+        Random random = new Random();
         Scanner input = new Scanner(System.in);
 
-        while (gameRunning) {
-            // Computer Player
-            String[] shapes = new String[]{"Rock", "Paper", "Scissor", "Exit"};
-            Random random = new Random();
+        while (true) {
             int computerInput = random.nextInt(3);
-            String computerMove = shapes[computerInput];
-            // Player
-            System.out.println("-----------------");
-            System.out.println("0: Rock");
-            System.out.println("1: Paper");
-            System.out.println("2: Scissor");
-            System.out.println("3: Exit");
+            System.out.println("-----------------\n0: Rock\n1: Paper\n2: Scissor\n3: Exit");
             int playerInput = input.nextInt();
 
+            if(playerInput == 3) break;
 
-            String playerMove = shapes[playerInput];
-            if(playerInput == 3){
-                gameRunning = false;
-            }
-            else if (playerInput == computerInput) {
-                System.out.println("Player: " + playerMove + " Computer: " + computerMove + " Which resulted in:");
-                System.out.println("Draw");
-            } else if (playerInput == 0 && computerInput == 2 || playerInput == 1 && computerInput == 0 || playerInput == 2 && computerInput == 1) {
-                System.out.println("Player: " + playerMove + " Computer: " + computerMove + " Which resulted in:");
-                System.out.println("WIN");
-            } else {
-                System.out.println("Player: " + playerMove + " Computer: " + computerMove + " Which resulted in:");
-                System.out.println("Loss");
-            }
+            String result = (playerInput == computerInput) ? "Draw" :
+                    ((playerInput == 0 && computerInput == 2) ||
+                            (playerInput == 1 && computerInput == 0) ||
+                            (playerInput == 2 && computerInput == 1)) ? "WIN" : "Loss";
 
+            System.out.println("Player: " + shapes[playerInput] + " Computer: " + shapes[computerInput] + " Which resulted in:");
+            System.out.println(result);
         }
     }
 }
